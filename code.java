@@ -82,3 +82,54 @@ public class HospitalApplicationTests {
 		list.add(doctor4);
 		doctorRepo.saveAll(list);
 	}
+	private PatientRepo patientRepo;
+
+	/**
+	 * Adding Patients into databases
+	 */
+
+	@Test
+	public void addPatient() {
+
+		ArrayList<Patient> patients = new ArrayList<Patient>();
+		Patient patient1 = new Patient();
+		patient1.setFname("rahul");
+		patient1.setLname("chavan");
+		Insurance insurance = new Insurance();
+		insurance.setCopay(25874125.25);
+		insurance.setProviderName("sbi bank");
+		patient1.setInsurance(insurance);
+
+		Patient patient2 = new Patient();
+		patient2.setFname("rahini");
+		patient2.setLname("chavan");
+		patient2.setInsurance(insurance);
+
+		Patient patient3 = new Patient();
+		patient3.setFname("seema");
+		patient3.setLname("chavan");
+		patient3.setInsurance(insurance);
+
+		patients.add(patient1);
+		patients.add(patient2);
+		patients.add(patient3);
+		patientRepo.saveAll(patients);
+	}
+
+	/**
+	 * Update the Patients Mobile number using id
+	 */
+	@Test
+	public void updatePatient() {
+		Patient patient1 = new Patient();
+		patient1.setId(7L);
+		patient1.setFname("rohini");
+		patient1.setLname("chavan");
+		Insurance insurance = new Insurance();
+		insurance.setCopay(25874125.25);
+		insurance.setProviderName("sbi bank");
+		patient1.setInsurance(insurance);
+		patient1.setPhone("8574857485");
+		patientRepo.save(patient1);
+
+	}

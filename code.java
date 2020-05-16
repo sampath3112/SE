@@ -133,3 +133,34 @@ public class HospitalApplicationTests {
 		patientRepo.save(patient1);
 
 	}
+
+	public void addAppointment() {
+
+		Appointment appointment = new Appointment();
+		Timestamp appointmentTimestamp = new Timestamp(new Date().getTime());
+		appointment.setAppointmentTimestamp(appointmentTimestamp);
+		appointment.setReason("I have Problem");
+		appointment.setStared(true);
+		appointment.setEnded(false);
+		appointment.setDoctor(doctorRepo.findById(1L).get());
+		appointment.setPatient(patientRepo.findById(5L).get());
+		appointmentRepo.save(appointment);
+
+	}
+
+	/**
+	 * Fetch the appointment if doctor_id=1 for this we have to make the custom
+	 * queue
+	 */
+	@Test
+	public void getAppointment() {
+
+		Appointment appoint = appointmentRepo.getAppoint(1L);
+		assertNotNull(appoint);
+		System.out.println("Appoint id :-" + appoint.getId());
+		System.out.println("Appoint resion :-" + appoint.getReason());
+		System.out.println("Appoint Assigned Doctor info :- " + appoint.getDoctor());
+		System.out.println("Patient Info :-" + appoint.getPatient());
+		System.out.println("Insurance Info:-" + appoint.getPatient().getInsurance());
+
+	}

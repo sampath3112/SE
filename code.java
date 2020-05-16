@@ -164,3 +164,51 @@ public class HospitalApplicationTests {
 		System.out.println("Insurance Info:-" + appoint.getPatient().getInsurance());
 
 	}
+	public void testDoctor() {
+
+		Supplier<List<Doctor>> suppliDoctorInfo = () -> doctorRepo.findAll();
+
+		suppliDoctorInfo.get().stream().forEach(p -> {
+			System.out.println(p);
+		});
+	}
+
+	/**
+	 * join using jpql
+	 * select new Map(u.reason as resion ,p.fname as patientname,d.fname as doctorname) 
+	 * from Appointment as u 
+	 * inner join Patient as p on u.patients=p.id   
+	 * inner join Doctor as d on u.doctors=d.id 
+	 */
+	@Test
+	public void testJpql() {
+		
+		
+		/**
+		 * 
+		 * find doctor_name ,resion ,patient_name from appointment
+		 */
+		List<Map<String, Object>> appointmentPatientAndDoctorInfo = appointmentRepo.getAppointmentPatientAndDoctorInfo(); 
+		for (Map<String, Object> map : appointmentPatientAndDoctorInfo) {
+		        for (Map.Entry<String, Object> entry : map.entrySet()) {
+		            String key = entry.getKey();
+		            Object value = entry.getValue();
+		            System.out.println(key + " = " + value);
+		        }
+
+		   }
+		/**
+		 * 
+		 * using java stream 
+		 * 
+		 */
+			
+		List<Appointment> findAll = appointmentRepo.findAll();
+		findAll.forEach(p->{
+			System.out.println(p.getDoctor().getFname());
+			System.out.println(p.getPatient().getFname());
+			System.out.println(p.getReason());
+		});
+		
+		
+	}

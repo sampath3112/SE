@@ -148,11 +148,7 @@ public class HospitalApplicationTests {
 
 	}
 
-	/**
-	 * Fetch the appointment if doctor_id=1 for this we have to make the custom
-	 * queue
-	 */
-	@Test
+
 	public void getAppointment() {
 
 		Appointment appoint = appointmentRepo.getAppoint(1L);
@@ -164,23 +160,8 @@ public class HospitalApplicationTests {
 		System.out.println("Insurance Info:-" + appoint.getPatient().getInsurance());
 
 	}
-	public void testDoctor() {
-
-		Supplier<List<Doctor>> suppliDoctorInfo = () -> doctorRepo.findAll();
-
-		suppliDoctorInfo.get().stream().forEach(p -> {
-			System.out.println(p);
-		});
-	}
-
-	/**
-	 * join using jpql
-	 * select new Map(u.reason as resion ,p.fname as patientname,d.fname as doctorname) 
-	 * from Appointment as u 
-	 * inner join Patient as p on u.patients=p.id   
-	 * inner join Doctor as d on u.doctors=d.id 
-	 */
-	@Test
+	
+	
 	public void testJpql() {
 		
 		
@@ -197,11 +178,7 @@ public class HospitalApplicationTests {
 		        }
 
 		   }
-		/**
-		 * 
-		 * using java stream 
-		 * 
-		 */
+		
 			
 		List<Appointment> findAll = appointmentRepo.findAll();
 		findAll.forEach(p->{
